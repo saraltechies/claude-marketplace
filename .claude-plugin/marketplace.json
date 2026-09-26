@@ -1,0 +1,29 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "saraltechies",
+  "owner": {
+    "name": "Gaurav Agarwal",
+    "url": "https://github.com/saraltechies"
+  },
+  "metadata": {
+    "description": "Curated Claude Code plugins and skills by Saral Techies — handpicked community plugins plus our own skills."
+  },
+  "plugins": [
+    {
+      "name": "claude-seo",
+      "source": {
+        "source": "github",
+        "repo": "AgriciDaniel/claude-seo"
+      },
+      "description": "Comprehensive SEO analysis: technical SEO, content quality/E-E-A-T, schema, sitemaps, Core Web Vitals, local SEO, backlinks, AI search/GEO, e-commerce, hreflang and Google APIs. 26 sub-skills and 19 sub-agents. By AgriciDaniel (MIT).",
+      "author": {
+        "name": "AgriciDaniel",
+        "url": "https://github.com/AgriciDaniel"
+      },
+      "homepage": "https://github.com/AgriciDaniel/claude-seo",
+      "license": "MIT",
+      "category": "marketing",
+      "keywords": ["seo", "technical-seo", "schema-markup", "core-web-vitals", "local-seo", "geo", "ai-search", "backlinks"]
+    }
+  ]
+}
