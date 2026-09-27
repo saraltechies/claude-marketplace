@@ -1,0 +1,73 @@
+@extends('layouts.admin')
+
+@section('title', '{{Labels}}')
+
+@section('content')
+<div class="d-flex justify-content-between align-items-center flex-wrap gap-3 mb-3">
+    <h1 class="admin-page-title mb-0">{{Labels}}</h1>
+    <a href="{{ route('admin.{{route}}.create') }}" class="btn btn-primary">+ Add {{Label}}</a>
+</div>
+
+<div class="data-table-wrap">
+    <form method="GET" action="{{ route('admin.{{route}}.index') }}" class="data-table-toolbar">
+        <div class="d-flex gap-2">
+            <input type="search" name="q" value="{{ $search }}" class="form-control data-table-search" placeholder="Search {{labelsLower}}…" aria-label="Search">
+            <button type="submit" class="btn btn-outline-secondary">Search</button>
+            @if($search !== '')
+                <a href="{{ route('admin.{{route}}.index') }}" class="btn btn-link">Clear</a>
+            @endif
+        </div>
+    </form>
+    <div class="table-scroll">
+    <table class="table admin-table align-middle">
+        <thead>
+            <tr>
+                <th data-sort="text">Name</th>
+                <th data-sort="text">Status</th>
+                <th data-sort="text">Updated</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+        @forelse(${{modelsVar}} as ${{modelVar}})
+            <tr>
+                <td>{{ ${{modelVar}}->name }}</td>
+                <td>
+                    <span class="status-badge {{ ${{modelVar}}->is_active ? 'status-badge--active' : 'status-badge--inactive' }}">
+                        {{ ${{modelVar}}->is_active ? 'Active' : 'Hidden' }}
+                    </span>
+                </td>
+                <td data-value="{{ ${{modelVar}}->updated_at?->toIso8601String() }}">{{ ${{modelVar}}->updated_at?->format('Y-m-d') }}</td>
+                <td>
+                    <div class="row-actions">
+                        <a href="{{ route('admin.{{route}}.edit', ${{modelVar}}) }}">Edit</a>
+                        <form method="POST" action="{{ route('admin.{{route}}.toggle', ${{modelVar}}) }}">
+                            @csrf
+                            <button type="submit" class="btn-ghost-link">{{ ${{modelVar}}->is_active ? 'Hide' : 'Activate' }}</button>
+                        </form>
+                        <form method="POST" action="{{ route('admin.{{route}}.destroy', ${{modelVar}}) }}" onsubmit="return confirm('Delete this {{labelLower}}? This cannot be undone.');">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn-ghost-link text-danger">Delete</button>
+                        </form>
+                    </div>
+                </td>
+            </tr>
+        @empty
+            <tr>
+                <td colspan="4" class="text-secondary">
+                    @if($search !== '')
+                        No {{labelsLower}} match "{{ $search }}".
+                    @else
+                        No {{labelsLower}} yet. <a href="{{ route('admin.{{route}}.create') }}">Add the first one</a>.
+                    @endif
+                </td>
+            </tr>
+        @endforelse
+        </tbody>
+    </table>
+    </div>
+</div>
+
+{{ ${{modelsVar}}->links('admin.partials.pagination') }}
+@endsection

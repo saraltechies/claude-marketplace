@@ -1,0 +1,82 @@
+<?php
+
+namespace App\Http\Controllers\Admin;
+
+use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\{{Model}}Request;
+use App\Models\{{Model}};
+use App\Support\ActivityLogger;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
+use Illuminate\View\View;
+
+class {{Model}}Controller extends Controller
+{
+    public function index(Request $request): View
+    {
+        $search = trim((string) $request->query('q', ''));
+
+        ${{modelsVar}} = {{Model}}::query()
+            ->when($search !== '', fn ($query) => $query->where('name', 'like', '%' . $search . '%'))
+            ->orderBy('name')
+            ->paginate(20)
+            ->withQueryString();
+
+        return view('admin.{{route}}.index', [
+            '{{modelsVar}}' => ${{modelsVar}},
+            'search' => $search,
+        ]);
+    }
+
+    public function create(): View
+    {
+        return view('admin.{{route}}.form', ['{{modelVar}}' => new {{Model}}()]);
+    }
+
+    public function store({{Model}}Request $request): RedirectResponse
+    {
+        ${{modelVar}} = {{Model}}::create($request->validated());
+
+        ActivityLogger::log('{{modelVar}}.created', "Created {{labelLower}} \"{${{modelVar}}->name}\"");
+
+        return redirect()->route('admin.{{route}}.index')->with('success', '{{Label}} created.');
+    }
+
+    public function edit({{Model}} ${{modelVar}}): View
+    {
+        return view('admin.{{route}}.form', ['{{modelVar}}' => ${{modelVar}}]);
+    }
+
+    public function update({{Model}}Request $request, {{Model}} ${{modelVar}}): RedirectResponse
+    {
+        ${{modelVar}}->update($request->validated());
+
+        ActivityLogger::log('{{modelVar}}.updated', "Updated {{labelLower}} \"{${{modelVar}}->name}\"");
+
+        return redirect()->route('admin.{{route}}.index')->with('success', '{{Label}} updated.');
+    }
+
+    public function toggle({{Model}} ${{modelVar}}): RedirectResponse
+    {
+        ${{modelVar}}->update(['is_active' => !${{modelVar}}->is_active]);
+
+        ActivityLogger::log('{{modelVar}}.toggled', (${{modelVar}}->is_active ? 'Activated' : 'Deactivated') . " {{labelLower}} \"{${{modelVar}}->name}\"");
+
+        return back()->with('success', '{{Label}} ' . (${{modelVar}}->is_active ? 'activated.' : 'hidden.'));
+    }
+
+    public function destroy({{Model}} ${{modelVar}}): RedirectResponse
+    {
+        // Delete guard: refuse while other records still depend on this one, e.g.
+        // if (${{modelVar}}->products()->exists()) {
+        //     return back()->with('error', 'This {{labelLower}} still has products. Reassign them first.');
+        // }
+
+        $name = ${{modelVar}}->name;
+        ${{modelVar}}->delete();
+
+        ActivityLogger::log('{{modelVar}}.deleted', "Deleted {{labelLower}} \"{$name}\"");
+
+        return redirect()->route('admin.{{route}}.index')->with('success', '{{Label}} deleted.');
+    }
+}

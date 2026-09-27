@@ -1,0 +1,1 @@
+            <a href="{{ route('admin.{{route}}.index') }}" class="{{ request()->routeIs('admin.{{route}}.*') ? 'is-active' : '' }}">{{Labels}}</a>

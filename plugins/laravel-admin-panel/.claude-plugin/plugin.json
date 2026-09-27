@@ -1,0 +1,14 @@
+{
+  "name": "laravel-admin-panel",
+  "version": "1.0.0",
+  "description": "Scaffold a lightweight, dependency-free admin panel into any Laravel app - separate admin guard, sidebar layout, searchable/sortable tables, CRUD sections with toggles and delete guards, activity log, settings with custom scripts.",
+  "author": {
+    "name": "Gaurav Agarwal (Saral Techies)",
+    "email": "saraltechies@gmail.com",
+    "url": "https://github.com/saraltechies"
+  },
+  "license": "MIT",
+  "homepage": "https://github.com/saraltechies/claude-marketplace",
+  "repository": "https://github.com/saraltechies/claude-marketplace",
+  "keywords": ["laravel", "php", "admin-panel", "crud", "dashboard", "backend", "bootstrap"]
+}

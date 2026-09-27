@@ -1,0 +1,33 @@
+@extends('layouts.admin')
+
+@section('title', (${{modelVar}}->exists ? 'Edit' : 'Add') . ' {{Label}}')
+
+@section('content')
+<p class="mb-2"><a href="{{ route('admin.{{route}}.index') }}">&larr; All {{labelsLower}}</a></p>
+<h1 class="admin-page-title">{{ ${{modelVar}}->exists ? 'Edit {{Label}}' : 'Add {{Label}}' }}</h1>
+
+@include('admin.partials.errors')
+
+<form method="POST"
+      action="{{ ${{modelVar}}->exists ? route('admin.{{route}}.update', ${{modelVar}}) : route('admin.{{route}}.store') }}"
+      class="admin-card">
+    @csrf
+    @if(${{modelVar}}->exists) @method('PUT') @endif
+
+    <div class="mb-3">
+        <label class="form-label" for="name">Name</label>
+        <input type="text" id="name" name="name" class="form-control" required maxlength="255"
+               value="{{ old('name', ${{modelVar}}->name) }}">
+    </div>
+
+    {{-- Add one block per extra field; keep names in sync with the Form Request rules and the model's $fillable. --}}
+
+    <div class="form-check mb-4">
+        <input type="checkbox" id="is_active" name="is_active" value="1" class="form-check-input"
+               @checked(old('is_active', ${{modelVar}}->exists ? ${{modelVar}}->is_active : true))>
+        <label class="form-check-label" for="is_active">Active (visible on the site)</label>
+    </div>
+
+    <button type="submit" class="btn btn-primary">{{ ${{modelVar}}->exists ? 'Save changes' : 'Create {{labelLower}}' }}</button>
+</form>
+@endsection

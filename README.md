@@ -14,6 +14,7 @@ Then install any plugin from it:
 
 ```
 /plugin install claude-seo@saraltechies
+/plugin install laravel-admin-panel@saraltechies
 ```
 
 Or run `/plugin` and browse the **saraltechies** marketplace.
@@ -23,6 +24,14 @@ Or run `/plugin` and browse the **saraltechies** marketplace.
 | Plugin | What it does | Author | License |
 |---|---|---|---|
 | [claude-seo](https://github.com/AgriciDaniel/claude-seo) | Full SEO audits and analysis: technical SEO, E-E-A-T, schema, sitemaps, Core Web Vitals, local SEO, backlinks, AI search/GEO, e-commerce, hreflang, Google APIs. Run `/seo` after installing. | [AgriciDaniel](https://github.com/AgriciDaniel) | MIT |
+| [laravel-admin-panel](plugins/laravel-admin-panel) | Adds a complete admin panel to any Laravel app, with no admin package and no npm build: separate admin login, dark sidebar layout, searchable/sortable tables, CRUD sections with on/off toggles and delete protection, activity log and settings. Just ask Claude to "add an admin panel" or "add a coupons section to the admin". | [Saral Techies](https://github.com/saraltechies) | MIT |
+
+### laravel-admin-panel notes
+
+- Works with Laravel 10 and newer, and any database. Needs PHP on the machine (you already have it if you run Laravel).
+- Everything it generates is plain Laravel code in your project (controllers, Form Requests, Blade, one small JS file), so you can edit all of it freely.
+- Admin accounts are created with `php artisan admin:create <username>`. No default password is ever shipped.
+- To rebrand, change `--admin-accent` at the top of `public/css/admin.css`.
 
 ### claude-seo notes
 

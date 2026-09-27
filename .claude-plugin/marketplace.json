@@ -24,6 +24,18 @@
       "license": "MIT",
       "category": "marketing",
       "keywords": ["seo", "technical-seo", "schema-markup", "core-web-vitals", "local-seo", "geo", "ai-search", "backlinks"]
+    },
+    {
+      "name": "laravel-admin-panel",
+      "source": "./plugins/laravel-admin-panel",
+      "description": "Scaffold a lightweight, dependency-free admin panel into any Laravel app: separate admin login, sidebar layout, searchable/sortable tables, CRUD sections with on/off toggles and delete guards, activity log, and site settings. By Saral Techies.",
+      "author": {
+        "name": "Gaurav Agarwal (Saral Techies)",
+        "url": "https://github.com/saraltechies"
+      },
+      "license": "MIT",
+      "category": "development",
+      "keywords": ["laravel", "php", "admin-panel", "crud", "dashboard", "backend"]
     }
   ]
 }
