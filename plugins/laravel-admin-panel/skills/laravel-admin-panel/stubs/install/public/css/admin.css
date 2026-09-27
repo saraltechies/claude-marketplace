@@ -1,9 +1,13 @@
 /* Admin panel chrome, layered on top of Bootstrap 5.3.
-   To rebrand, change --admin-accent (and --admin-accent-dark for hover). */
+   To rebrand, change --admin-accent and --admin-accent-dark (hover), plus their
+   -rgb twins below them. */
 
 .admin-body {
   --admin-accent: #4f46e5;
   --admin-accent-dark: #4338ca;
+  /* Same two colors as R, G, B - Bootstrap 5.3 builds link colors from these */
+  --admin-accent-rgb: 79, 70, 229;
+  --admin-accent-dark-rgb: 67, 56, 202;
   --admin-sidebar-bg: #1e1f24;
   --admin-sidebar-text: #c9cbd3;
   --admin-sidebar-muted: #8b8e99;
@@ -15,7 +19,9 @@
   /* Point Bootstrap's own primary color at the accent */
   --bs-primary: var(--admin-accent);
   --bs-link-color: var(--admin-accent);
+  --bs-link-color-rgb: var(--admin-accent-rgb);
   --bs-link-hover-color: var(--admin-accent-dark);
+  --bs-link-hover-color-rgb: var(--admin-accent-dark-rgb);
 
   background: var(--admin-bg);
   font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;

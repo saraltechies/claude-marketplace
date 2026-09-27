@@ -2,6 +2,10 @@
 
 A curated [Claude Code](https://claude.com/claude-code) plugin marketplace: hand-picked community plugins plus our own skills, installable in two commands.
 
+![laravel-admin-panel demo: dashboard, sortable coupon list, adding a coupon, switching one off, and the activity log](docs/laravel-admin-panel-demo.gif)
+
+*The admin panel that **laravel-admin-panel** built from a single request: "Add an admin panel to my Laravel app. I need to manage discount coupons."*
+
 ## Install
 
 In Claude Code, add the marketplace once:
